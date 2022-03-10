@@ -1,11 +1,11 @@
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 
-const { getUserById } = require('../service/user');
+const { getUserById } = require('../services/user');
 const { RESPONSE_RESULT, ERROR_MESSAGES } = require('../utils/constants');
 const ErrorWithStatus = require('../utils/ErrorwithStatus');
 
-const verifyPoodadakToken = async (req, res, next) => {
+const verifyBreezToken = async (req, res, next) => {
   let prefix;
   let fetchedToken;
 
@@ -62,4 +62,4 @@ const verifyPoodadakToken = async (req, res, next) => {
   }
 };
 
-module.exports = verifyPoodadakToken;
+module.exports = verifyBreezToken;

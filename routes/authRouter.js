@@ -1,15 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const {
-  signinKakao,
-  signinNaver,
-  sendVerified,
-} = require('../controller/authController');
-const verifyPoodadakToken = require('../middlewares/verifyPoodadakToken');
+const { signinKakao, sendVerified } = require('../controllers/authController');
+const verifyBreezToken = require('../middlewares/verifyToken');
 
 router.post('/kakao', signinKakao);
-router.post('/naver', signinNaver);
-router.post('/token-verification', verifyPoodadakToken, sendVerified);
+router.post('/token-verification', verifyBreezToken, sendVerified);
 
 module.exports = router;
