@@ -10,10 +10,10 @@ const { RESPONSE_RESULT, ERROR_MESSAGES } = require('../utils/constants');
 const ErrorWithStatus = require('../utils/ErrorwithStatus');
 
 exports.getFeeds = async (req, res, next) => {
-  const { q, page } = req.query;
+  const { page } = req.query;
 
   try {
-    const feeds = await findAllFeeds(q, page);
+    const feeds = await findAllFeeds(page);
 
     res.json(feeds);
     return;

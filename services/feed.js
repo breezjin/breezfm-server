@@ -1,13 +1,13 @@
 const Feed = require('../models/Feed');
 
-exports.findAllFeeds = async (q, page) => {
+exports.findAllFeeds = async (page) => {
   const itemsPerPage = 10;
   const count = await Feed.countDocuments();
 
-  const feeds = await Feed.find({
-    limit: itemsPerPage,
-    skip: itemsPerPage * (page - 1),
-  });
+  const feeds = await Feed.find()
+    .sort({ updatedAt: -1 })
+    .skip(itemsPerPage * (page - 1))
+    .limit(itemsPerPage);
 
   return {
     feeds,
