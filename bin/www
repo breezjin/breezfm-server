@@ -4,7 +4,7 @@ const debug = require('debug')('poodadak-server:server');
 
 const app = require('../server');
 
-const port = normalizePort(process.env.PORT || '8000');
+const port = normalizePort(process.env.PORT || '8080');
 
 app.set('port', port);
 
