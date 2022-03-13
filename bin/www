@@ -1,6 +1,6 @@
 const http = require('http');
 
-const debug = require('debug')('poodadak-server:server');
+const debug = require('debug')('breez-server:server');
 
 const app = require('../server');
 
