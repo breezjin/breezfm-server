@@ -1,4 +1,3 @@
-/* eslint-disable no-prototype-builtins */
 const mongoose = require('mongoose');
 
 const { SOCIAL_SERVICE } = require('../utils/constants');
@@ -8,9 +7,8 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  avartar: {
+  avatar: {
     type: String,
-    required: true,
   },
   email: {
     type: String,

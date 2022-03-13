@@ -1,10 +1,18 @@
 const mongoose = require('mongoose');
 
 const feedSchema = new mongoose.Schema({
-  writer: {
+  writerId: {
     type: mongoose.ObjectId,
     required: true,
     ref: 'User',
+  },
+  writerAvatar: {
+    type: String,
+    required: true,
+  },
+  writerName: {
+    type: String,
+    required: true,
   },
   description: {
     type: String,
@@ -21,7 +29,6 @@ const feedSchema = new mongoose.Schema({
   },
   deletedAt: {
     type: String,
-    required: true,
   },
 });
 

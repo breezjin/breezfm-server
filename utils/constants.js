@@ -13,14 +13,14 @@ exports.ERROR_MESSAGES = {
   FAILED_TO_ESTABLISH_SOCKET_CONNECTION:
     "ERROR: Cannot establish socket connection either by authentication error or db error.",
   FAILED_TO_GET_USER_PROFILE: "ERROR: failed to get userProfile.",
-  FAILED_TO_FIND_REVIEW: "ERROR: faileded to find review...",
+  FAILED_TO_FIND_FEED: "ERROR: faileded to find feed...",
   FAILED_TO_FIND_EXISTING_CHATROOM:
     "ERROR: failed to find existing chatroom...",
-  FAILED_TO_CREATE_REVIEW: "ERROR: faileded to create review...",
-  FAILED_TO_UPDATE_REVIEW: "ERROR: faileded to update review.",
+  FAILED_TO_CREATE_FEED: "ERROR: faileded to create feed...",
+  FAILED_TO_UPDATE_FEED: "ERROR: faileded to update feed.",
   FAILED_TO_GET_S3_URL: "ERROR: failed to get s3URL...",
   FAILED_TO_GET_TOILET: "ERROR: failed to get toilet...",
-  FAILED_TO_GET_REVIEW_LIST: "ERROR: failed to get reviewList...",
+  FAILED_TO_GET_FEED_LIST: "ERROR: failed to get feedList...",
   FAILED_TO_CREATE_CHATROOM: "ERROR: failed to create chatroom...",
   FAILED_TO_CHECK_CHATROOM_LIVE_STATUS:
     "ERROR: failed to check chatroom's live-status...",

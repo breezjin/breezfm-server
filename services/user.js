@@ -12,18 +12,18 @@ exports.getUserById = async function (id) {
   return await User.findById(id);
 };
 
-exports.addReviewToUser = async function (userId, reviewId) {
+exports.addFeedToUser = async function (userId, feedId) {
   return await User.findByIdAndUpdate(
     userId,
-    { $push: { reviewList: reviewId } },
+    { $push: { feedList: feedId } },
     { new: true }
   );
 };
 
-exports.deleteReviewByUserId = async function (userId, reviewId) {
+exports.deleteFeedByUserId = async function (userId, feedId) {
   return await User.findByIdAndUpdate(
     userId,
-    { $pull: { reviewList: reviewId } },
+    { $pull: { reviewList: feedId } },
     { new: true }
   );
 };

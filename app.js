@@ -12,6 +12,8 @@ const helmet = require('helmet');
 const logger = require('morgan');
 
 const authRouter = require('./routes/authRouter');
+const feedsRouter = require('./routes/feedsRouter');
+const profileRouter = require('./routes/profileRouter');
 
 const corsOptions = {
   origin: process.env.CORS_ORIGIN_URL,
@@ -29,6 +31,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors(corsOptions));
 
 app.use('/auth', authRouter);
+app.use('/profile', profileRouter);
+app.use('/feeds', feedsRouter);
 
 app.use(function (error, req, res, next) {
   res.status(error.status || 500);

@@ -18,6 +18,9 @@ function createAndSendToken(user, res) {
   res.json({
     result: RESPONSE_RESULT.OK,
     userId: user._id,
+    userAvatar: user.avatar,
+    userName: user.username,
+    userEmail: user.email,
     BREEZ_TOKEN: BREEZ_TOKEN,
   });
 
@@ -74,7 +77,7 @@ exports.signinKakao = async (req, res, next) => {
 
     const fetchUserUrlParams = new url.URLSearchParams({
       property_keys:
-        '["kakao_account.email", "kakao_account.profile.nickname", "kakao_account.profile.profile_image"]',
+        '["kakao_account.email", "kakao_account.profile.nickname", "kakao_account.profile.profile_image_url"]',
     });
 
     const fetchedUserInfo = await axios.post(
@@ -96,6 +99,7 @@ exports.signinKakao = async (req, res, next) => {
     if (!currentUser) {
       const newUser = {
         username: fetchedUserInfo.data.kakao_account.profile.nickname,
+        avatar: fetchedUserInfo.data.kakao_account.profile.profile_image_url,
         email: fetchedUserInfo.data.kakao_account.email,
         socialService,
       };
@@ -118,5 +122,8 @@ exports.sendVerified = (req, res, next) => {
   res.json({
     result: RESPONSE_RESULT.VERIFIED,
     userId: req.userInfo._id,
+    userAvatar: req.userInfo.avatar,
+    userName: req.userInfo.username,
+    userEmail: req.userInfo.email,
   });
 };
