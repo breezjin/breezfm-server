@@ -1,7 +1,7 @@
 const {
   createFeed,
   updateFeed,
-  findAllFeeds,
+  findLazyFeeds,
   findFeedById,
   deleteFeedById,
 } = require('../services/feed');
@@ -13,7 +13,7 @@ exports.getFeeds = async (req, res, next) => {
   const { page } = req.query;
 
   try {
-    const feeds = await findAllFeeds(page);
+    const feeds = await findLazyFeeds(page);
 
     res.json(feeds);
     return;

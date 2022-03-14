@@ -1,6 +1,6 @@
 const Feed = require('../models/Feed');
 
-exports.findAllFeeds = async (page) => {
+exports.findLazyFeeds = async (page) => {
   const itemsPerPage = 10;
   const count = await Feed.countDocuments();
 
