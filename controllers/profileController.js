@@ -1,4 +1,4 @@
-const { findUserByUserId, findReviewByUserId } = require('../services/profile');
+const { findUserByUserId, findFeedsByUserId } = require('../services/profile');
 const { RESPONSE_RESULT, ERROR_MESSAGES } = require('../utils/constants');
 const ErrorWithStatus = require('../utils/ErrorwithStatus');
 
@@ -27,7 +27,7 @@ exports.getUserFeeds = async (req, res, next) => {
   const { userId } = req.params;
 
   try {
-    const response = await findReviewByUserId(userId);
+    const response = await findFeedsByUserId(userId);
 
     res.json(response);
 

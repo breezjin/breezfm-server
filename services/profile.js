@@ -4,11 +4,11 @@ exports.findUserByUserId = async (userId) => {
   return await User.findById(userId);
 };
 
-exports.findReviewByUserId = async (userId) => {
+exports.findFeedsByUserId = async (userId) => {
   return await User.findById(userId)
     .populate({
-      path: 'reviewList',
-      populate: { path: 'toilet', model: 'Toilet' },
+      path: 'feedList',
+      populate: { path: 'feeds', model: 'Feed' },
     })
     .lean();
 };
