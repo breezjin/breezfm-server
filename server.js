@@ -14,6 +14,7 @@ const logger = require('morgan');
 const authRouter = require('./routes/authRouter');
 const feedsRouter = require('./routes/feedsRouter');
 const profileRouter = require('./routes/profileRouter');
+const usersRouter = require('./routes/usersRouter');
 
 const corsOptions = {
   origin: process.env.CORS_ORIGIN_URL,
@@ -33,6 +34,7 @@ app.use(cors(corsOptions));
 app.use('/auth', authRouter);
 app.use('/profile', profileRouter);
 app.use('/feeds', feedsRouter);
+app.use('/users', usersRouter);
 
 app.use(function (error, req, res, next) {
   res.status(error.status || 500);
