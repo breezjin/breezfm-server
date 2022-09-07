@@ -50,7 +50,14 @@ exports.getFeed = async (req, res, next) => {
 
 exports.saveFeed = async (req, res, next) => {
   try {
-    const { writerAvatar, writerName, description, tag, updatedAt } = req.body;
+    const {
+      writerAvatar,
+      writerName,
+      description,
+      tag,
+      nowPlaying,
+      updatedAt,
+    } = req.body;
 
     const submittedFeed = {
       writerId: req.userInfo._id,
@@ -58,6 +65,7 @@ exports.saveFeed = async (req, res, next) => {
       writerName,
       description,
       tag,
+      nowPlaying,
       updatedAt,
     };
 

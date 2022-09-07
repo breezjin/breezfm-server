@@ -23,6 +23,9 @@ const feedSchema = new mongoose.Schema({
   tag: {
     type: Array,
   },
+  nowPlaying: {
+    type: String,
+  },
   updatedAt: {
     type: String,
     required: true,

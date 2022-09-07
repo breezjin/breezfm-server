@@ -29,6 +29,81 @@ function createAndSendToken(user, res) {
 
 exports.signinKakao = async (req, res, next) => {
   const socialService = SOCIAL_SERVICE.KAKAO;
+  const clientTokenVerificationResponse = req.body;
+
+  const didUserApproveEmail =
+    clientTokenVerificationResponse.scope.includes('account_email');
+
+  try {
+    if (!didUserApproveEmail) {
+      await axios.post(
+        process.env.KAKAO_REST_API_UNLINK_USER_URL,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${clientTokenVerificationResponse.access_token}`,
+          },
+        }
+      );
+
+      next(
+        new ErrorWithStatus(
+          null,
+          401,
+          RESPONSE_RESULT.ERROR,
+          ERROR_MESSAGES.USER_DID_NOT_APPROVE_NECESSARY_INFO
+        )
+      );
+
+      return;
+    }
+
+    const fetchUserUrlParams = new url.URLSearchParams({
+      property_keys:
+        '["kakao_account.email", "kakao_account.profile.nickname", "kakao_account.profile.profile_image_url"]',
+    });
+
+    const fetchedUserInfo = await axios.post(
+      process.env.KAKAO_REST_API_FETCH_USER_INFO_URL,
+      fetchUserUrlParams.toString(),
+      {
+        headers: {
+          Authorization: `Bearer ${clientTokenVerificationResponse.access_token}`,
+          'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
+        },
+      }
+    );
+
+    let currentUser = await getUser({
+      email: fetchedUserInfo.data.kakao_account.email,
+      socialService,
+    });
+
+    if (!currentUser) {
+      const newUser = {
+        username: fetchedUserInfo.data.kakao_account.profile.nickname,
+        avatar: fetchedUserInfo.data.kakao_account.profile.profile_image_url,
+        email: fetchedUserInfo.data.kakao_account.email,
+        socialService,
+      };
+
+      currentUser = await createUser(newUser);
+    }
+
+    createAndSendToken(currentUser, res);
+  } catch (error) {
+    const errMessage =
+      error instanceof mongoose.Error
+        ? ERROR_MESSAGES.FAILED_TO_COMMUNICATE_WITH_DB
+        : ERROR_MESSAGES.FAILED_TO_AUTHENTICATE_KAKAO;
+
+    next(new ErrorWithStatus(error, 500, RESPONSE_RESULT.ERROR, errMessage));
+  }
+};
+
+/** FIXME: 아래는 React 버전으로 세팅할 경우 활용하는 코드임
+exports.signinKakao = async (req, res, next) => {
+  const socialService = SOCIAL_SERVICE.KAKAO;
 
   try {
     const params = new url.URLSearchParams({
@@ -117,6 +192,7 @@ exports.signinKakao = async (req, res, next) => {
     next(new ErrorWithStatus(error, 500, RESPONSE_RESULT.ERROR, errMessage));
   }
 };
+ */
 
 exports.sendVerified = (req, res, next) => {
   res.json({
