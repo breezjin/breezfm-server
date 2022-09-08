@@ -13,6 +13,7 @@ const logger = require('morgan');
 
 const authRouter = require('./routes/authRouter');
 const feedsRouter = require('./routes/feedsRouter');
+const indexRouter = require('./routes/index');
 const profileRouter = require('./routes/profileRouter');
 const usersRouter = require('./routes/usersRouter');
 
@@ -31,6 +32,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors(corsOptions));
 
+app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/profile', profileRouter);
 app.use('/feeds', feedsRouter);
